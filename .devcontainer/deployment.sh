@@ -7,270 +7,269 @@ sed -i "s,TENANTURL_TOREPLACE,$DT_URL," /workspaces/$RepositoryName/dynatrace/dy
 sed -i "s,CLUSTER_NAME_TO_REPLACE,aio-dt-demo,"  /workspaces/$RepositoryName/dynatrace/dynakube.yaml
 
 # Capture OpenTelemetry Span Attributes
-curl -X 'POST' \
-  "$DT_URL/api/v2/settings/objects?validateOnly=false" \
-  -H 'accept: application/json; charset=utf-8' \
-  -H "Authorization: Api-Token $DT_WRITE_SETTINGS_TOKEN" \
-  -H 'Content-Type: application/json; charset=utf-8' \
-  -d '[ {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "gen_ai.request.model"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "gen_ai.system"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "gen_ai.request.max_tokens"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "gen_ai.request.temperature"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "gen_ai.request.top_p"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "gen_ai.response.finish_reasons"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "gen_ai.response.id"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "gen_ai.response.model"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "gen_ai.usage.completion_tokens"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "gen_ai.usage.prompt_tokens"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "gen_ai.prompt.0.content"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "llm.headers"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "llm.is_streaming"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "llm.request.type"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "llm.usage.total_tokens"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "openai.api_base"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "db.operation"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "db.system"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "db.weaviate.query.get.class_name"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "db.weaviate.query.get.properties"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "gen_ai.completion.0.content"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "gen_ai.completion.0.finish_reason"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "gen_ai.completion.0.role"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "gen_ai.prompt.0.content"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "gen_ai.prompt.0.role"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "weaviate.data.crud_data.create.class_name"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "weaviate.data.crud_data.create.data_object"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "traceloop.entity.input"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "traceloop.entity.name"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "traceloop.entity.output"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "traceloop.span.kind"
-          }
-        }, {
-          "schemaId": "builtin:attribute-allow-list",
-          "schemaVersion": "0.0.10",
-          "scope": "environment",
-          "value": {
-            "enabled": true,
-            "key": "traceloop.workflow.name"
-          }
-        }
-      ]'
-
+#curl -X 'POST' \
+  #"$DT_URL/api/v2/settings/objects?validateOnly=false" \
+  #-H 'accept: application/json; charset=utf-8' \
+  #-H "Authorization: Api-Token $DT_WRITE_SETTINGS_TOKEN" \
+  #-H 'Content-Type: application/json; charset=utf-8' \
+  #-d '[ {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "gen_ai.request.model"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "gen_ai.system"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "gen_ai.request.max_tokens"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "gen_ai.request.temperature"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "gen_ai.request.top_p"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "gen_ai.response.finish_reasons"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "gen_ai.response.id"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "gen_ai.response.model"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "gen_ai.usage.completion_tokens"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "gen_ai.usage.prompt_tokens"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "gen_ai.prompt.0.content"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "llm.headers"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "llm.is_streaming"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "llm.request.type"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "llm.usage.total_tokens"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "openai.api_base"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "db.operation"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "db.system"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "db.weaviate.query.get.class_name"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "db.weaviate.query.get.properties"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "gen_ai.completion.0.content"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "gen_ai.completion.0.finish_reason"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "gen_ai.completion.0.role"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "gen_ai.prompt.0.content"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "gen_ai.prompt.0.role"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "weaviate.data.crud_data.create.class_name"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "weaviate.data.crud_data.create.data_object"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "traceloop.entity.input"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "traceloop.entity.name"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "traceloop.entity.output"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "traceloop.span.kind"
+          #}
+        #}, {
+          #"schemaId": "builtin:attribute-allow-list",
+          #"schemaVersion": "0.0.10",
+          #"scope": "environment",
+          #"value": {
+            #"enabled": true,
+            #"key": "traceloop.workflow.name"
+          #}
+        #}
+      #]'
 # Create secret for k6 to use
 kubectl -n boot-camp-app create secret generic dt-details \
   --from-literal=DT_ENDPOINT=$DT_URL \
