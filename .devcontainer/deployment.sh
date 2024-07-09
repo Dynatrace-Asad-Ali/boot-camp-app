@@ -273,10 +273,10 @@ sed -i "s,CLUSTER_NAME_TO_REPLACE,aio-dt-demo,"  /workspaces/$RepositoryName/dyn
 # Create secret for k6 to use
 kubectl -n boot-camp-app create secret generic dt-details \
   --from-literal=DT_ENDPOINT=$DT_URL \
-  --from-literal=DT_API_TOKEN=$DT_TOKEN
+  --from-literal=DT_API_TOKEN=$DT_OPERATOR_TOKEN
 
 # Deploy Dynatrace
-kubectl -n dynatrace create secret generic dynakube --from-literal="apiToken=$DT_OPERATOR_TOKEN" --from-literal="dataIngestToken=$DT_TOKEN"
+kubectl -n dynatrace create secret generic dynakube --from-literal="apiToken=$DT_OPERATOR_TOKEN" --from-literal="dataIngestToken=$DT_DATAINGEST_TOKEN"
 
 wget -O /workspaces/$RepositoryName/dynatrace/kubernetes.yaml https://github.com/Dynatrace/dynatrace-operator/releases/download/v0.15.0/kubernetes.yaml
 wget -O /workspaces/$RepositoryName/dynatrace/kubernetes-csi.yaml https://github.com/Dynatrace/dynatrace-operator/releases/download/v0.15.0/kubernetes-csi.yaml
@@ -291,10 +291,7 @@ kubectl -n dynatrace apply -f /workspaces/$RepositoryName/dynatrace/dynakube.yam
 
 kubectl create secret generic dynatrace-otelcol-dt-api-credentials \
   --from-literal=DT_ENDPOINT=$DT_URL \
-  --from-literal=DT_API_TOKEN=$DT_TOKEN
-
-kubectl create secret generic openai-details -n boot-camp-app \
-  --from-literal=API_KEY=$OPEN_AI_TOKEN
+  --from-literal=DT_API_TOKEN=$DT_DATAINGEST_TOKEN
 
 helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
 helm repo update
