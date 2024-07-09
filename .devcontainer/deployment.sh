@@ -4,7 +4,7 @@ kubectl create namespace boot-camp-app
 kubectl create namespace dynatrace
 
 sed -i "s,TENANTURL_TOREPLACE,$DT_URL," /workspaces/$RepositoryName/dynatrace/dynakube.yaml
-sed -i "s,CLUSTER_NAME_TO_REPLACE,aio-dt-demo,"  /workspaces/$RepositoryName/dynatrace/dynakube.yaml
+sed -i "s,CLUSTER_NAME_TO_REPLACE,bootcamp-dt-demo,"  /workspaces/$RepositoryName/dynatrace/dynakube.yaml
 
 # Capture OpenTelemetry Span Attributes
 #curl -X 'POST' \
