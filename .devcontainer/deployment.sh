@@ -6,6 +6,14 @@ kubectl create namespace dynatrace
 sed -i "s,TENANTURL_TOREPLACE,$DT_URL," /workspaces/$RepositoryName/dynatrace/dynakube.yaml
 sed -i "s,CLUSTER_NAME_TO_REPLACE,bootcamp-dt-demo,"  /workspaces/$RepositoryName/dynatrace/dynakube.yaml
 
+clusterName=`kubectl config view --minify -o jsonpath='{.clusters[].name}'`
+sed -i "s,{ENTER_YOUR_CLUSTER_NAME},$clusterName,"  /workspaces/$RepositoryName/dynatrace/values.yaml
+sed -i "s,{ENTER_YOUR_INGEST_TOKEN},$DT_DATAINGEST_TOKEN,"  /workspaces/$RepositoryName/dynatrace/values.yaml
+
+#Extract the tenant name from DT_URL variable
+tenantName=`echo $DT_URL | awk -F "[:,.]" '{print $2}' | cut -c3-`
+sed -i "s,{your-environment-id},$tenantName,"  /workspaces/$RepositoryName/dynatrace/values.yaml
+
 # Capture OpenTelemetry Span Attributes
 #curl -X 'POST' \
   #"$DT_URL/api/v2/settings/objects?validateOnly=false" \
@@ -296,6 +304,11 @@ kubectl create secret generic dynatrace-otelcol-dt-api-credentials \
 helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
 helm repo update
 helm upgrade -i dynatrace-collector open-telemetry/opentelemetry-collector -f collector-values.yaml --wait
+
+#install fluentbit for log ingestion
+helm repo add fluent https://fluent.github.io/helm-charts
+helm repo update
+helm install fluent-bit fluent/fluent-bit -f /workspaces/$RepositoryName/dynatrace/values.yaml --create-namespace --namespace dynatrace-fluent-bit
 
 kubectl apply -f deployment/deployment.yaml -n boot-camp-app
 
