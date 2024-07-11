@@ -8,7 +8,7 @@ sed -i "s,CLUSTER_NAME_TO_REPLACE,bootcamp-dt-demo,"  /workspaces/$RepositoryNam
 
 clusterName=`kubectl config view --minify -o jsonpath='{.clusters[].name}'`
 sed -i "s,{ENTER_YOUR_CLUSTER_NAME},$clusterName,"  /workspaces/$RepositoryName/dynatrace/values.yaml
-sed -i "s,{ENTER_YOUR_INGEST_TOKEN},$DT_DATAINGEST_TOKEN,"  /workspaces/$RepositoryName/dynatrace/values.yaml
+sed -i "s,{ENTER_YOUR_INGEST_TOKEN},$DT_LOG_INGEST_TOKEN,"  /workspaces/$RepositoryName/dynatrace/values.yaml
 
 #Extract the tenant name from DT_URL variable
 tenantName=`echo $DT_URL | awk -F "[:,.]" '{print $2}' | cut -c3-`

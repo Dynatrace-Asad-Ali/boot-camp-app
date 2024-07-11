@@ -63,7 +63,10 @@
       "description": "Dynatrace K8s Operator Token"
     },
     "DT_DATAINGEST_TOKEN": {
-      "description": "Dynatrace Data Ingest Token"
+      "description": "Dynatrace Data Ingest Token for Metrics"
+    },
+    "DT_LOG_INGEST_TOKEN": {
+      "description": "Dynatrace Data Ingest Token for Logs"
     }
   }
 }
