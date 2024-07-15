@@ -49,11 +49,11 @@ config:
     #    Regex $kubernetes['annotations']['logs.dynatrace.com/ingest'] ^true$
 
     # Only include logs from specific namespaces, remove the whole filter section to get all logs
-    #[FILTER]
-    #    Name grep
-    #    Match kube.*
-    #    Logical_Op or
-    #    Regex $kubernetes['namespace_name'] ^my-namespace-a$
+    [FILTER]
+        Name grep
+        Match kube.*
+        Logical_Op or
+        Regex $kubernetes['namespace_name'] ^boot-camp-app$
     #    Regex $kubernetes['namespace_name'] ^my-namespace-b$
 
     [FILTER]
