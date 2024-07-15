@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: boot-camp-app
-          image: alikingdom/boot-camp-app:latest
+          image: alikingdom/boot-camp-app:1.0
           ports:
             - containerPort: 8080
             - containerPort: 2112
