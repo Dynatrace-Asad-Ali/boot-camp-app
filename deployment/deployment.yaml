@@ -15,6 +15,7 @@ spec:
         metrics.dynatrace.com/scrape: "true"
         metrics.dynatrace.com/port: "2112"
         metrics.dynatrace.com/path: "/metrics"
+        logs.dynatrace.com/ingest: "true"
     spec:
       containers:
         - name: boot-camp-app
