@@ -1,6 +1,6 @@
 # The template for this file is available on GitHub: https://github.com/Dynatrace/dynatrace-operator/blob/main/assets/samples/dynakube/cloudNativeFullStack.yaml
 apiVersion: v1
-data:
+stringData:
   apiToken: API_TOKEN_TO_REPLACE
   dataIngestToken: DATA_INGEST_TOKEN_TO_REPLACE
 kind: Secret
