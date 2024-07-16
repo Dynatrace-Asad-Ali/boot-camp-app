@@ -13,7 +13,7 @@ helm install dynatrace-operator oci://public.ecr.aws/dynatrace/dynatrace-operato
     --atomic
 
 # Create secret for OneAgent to use
-kubectl -n boot-camp-app create secret generic bootcamp \
+kubectl -n dynatrace create secret generic bootcamp \
   --from-literal=DT_ENDPOINT=$DT_URL \
   --from-literal=DT_API_TOKEN=$DT_OPERATOR_TOKEN
 
