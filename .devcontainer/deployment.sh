@@ -12,6 +12,11 @@ helm install dynatrace-operator oci://public.ecr.aws/dynatrace/dynatrace-operato
     --namespace dynatrace \
     --atomic
 
+# Create secret for OneAgent to use
+kubectl -n boot-camp-app create secret generic bootcamp \
+  --from-literal=DT_ENDPOINT=$DT_URL \
+  --from-literal=DT_API_TOKEN=$DT_OPERATOR_TOKEN
+
 # Install full stack cloud native K8s agent
 kubectl apply -f /workspaces/$RepositoryName/dynatrace/dynakube.yaml
 #sed -i "s,CLUSTER_NAME_TO_REPLACE,bootcamp-dt-demo,"  /workspaces/$RepositoryName/dynatrace/dynakube.yaml
@@ -23,11 +28,6 @@ kubectl apply -f /workspaces/$RepositoryName/dynatrace/dynakube.yaml
 #Extract the tenant name from DT_URL variable
 #tenantName=`echo $DT_URL | awk -F "[:,.]" '{print $2}' | cut -c3-`
 #sed -i "s,{your-environment-id},$tenantName,"  /workspaces/$RepositoryName/dynatrace/values.yaml
-
-# Create secret for k6 to use
-#kubectl -n boot-camp-app create secret generic dt-details \
-#  --from-literal=DT_ENDPOINT=$DT_URL \
-#  --from-literal=DT_API_TOKEN=$DT_OPERATOR_TOKEN
 
 # Deploy Dynatrace
 #kubectl -n dynatrace create secret generic dynakube --from-literal="apiToken=$DT_OPERATOR_TOKEN" --from-literal="dataIngestToken=$DT_DATAINGEST_TOKEN"

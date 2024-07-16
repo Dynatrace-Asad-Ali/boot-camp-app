@@ -1,14 +1,14 @@
 # The template for this file is available on GitHub: https://github.com/Dynatrace/dynatrace-operator/blob/main/assets/samples/dynakube/cloudNativeFullStack.yaml
-apiVersion: v1
-stringData:
-  apiToken: API_TOKEN_TO_REPLACE
-  dataIngestToken: DATA_INGEST_TOKEN_TO_REPLACE
-kind: Secret
-metadata:
-  name: bootcamp
-  namespace: dynatrace
-type: Opaque
----
+#apiVersion: v1
+#stringData:
+#  apiToken: API_TOKEN_TO_REPLACE
+#  dataIngestToken: DATA_INGEST_TOKEN_TO_REPLACE
+#kind: Secret
+#metadata:
+#  name: bootcamp
+#  namespace: dynatrace
+#type: Opaque
+#---
 apiVersion: dynatrace.com/v1beta1
 kind: DynaKube
 metadata:
