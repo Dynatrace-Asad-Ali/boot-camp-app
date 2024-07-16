@@ -14,8 +14,8 @@ helm install dynatrace-operator oci://public.ecr.aws/dynatrace/dynatrace-operato
 
 # Create secret for OneAgent to use
 kubectl -n dynatrace create secret generic bootcamp \
-  --from-literal=DT_ENDPOINT=$DT_URL \
-  --from-literal=DT_API_TOKEN=$DT_OPERATOR_TOKEN
+  --from-literal=apiToken=$DT_OPERATOR_TOKEN \
+  --from-literal=dataIngestToken=$DT_DATAINGEST_TOKEN
 
 # Install full stack cloud native K8s agent
 kubectl apply -f /workspaces/$RepositoryName/dynatrace/dynakube.yaml
