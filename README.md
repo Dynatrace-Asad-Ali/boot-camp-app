@@ -15,4 +15,5 @@ Dynatrace Data Ingest Token for Metrics
 ### DT_LOG_INGEST_TOKEN
 
 Dynatrace Data Ingest Token for Logs.
+
 Scope: Ingest Logs
